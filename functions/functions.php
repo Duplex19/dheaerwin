@@ -1,6 +1,6 @@
 <?php 
 
-$link = mysqli_connect("localhost", "duplex", "duplex1909", "erwin");
+$link = mysqli_connect("localhost", "root", "", "erwin");
 
 
 function query($query){
@@ -181,5 +181,21 @@ function register($data){
 
     return mysqli_affected_rows($link);
 
+}
+
+function set_hero($data) {
+
+    global $link;
+$hero = htmlspecialchars($data["hero"]);
+
+
+$input = "UPDATE hero SET
+               description = '$hero'"
+               ;
+
+mysqli_query($link, $input);
+
+
+return mysqli_affected_rows($link);
 }
 ?>

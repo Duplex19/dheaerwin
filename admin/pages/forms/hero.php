@@ -1,12 +1,16 @@
 <?php 
+
 session_start();
 
 if (!isset($_SESSION["login"])) {
   header("Location: ../examples/login.php");
   exit;
 }
-
 require '../../../functions/functions.php';
+
+
+
+$album = query("SELECT * FROM hero ")[0];
 
 
 ?>
@@ -212,13 +216,13 @@ require '../../../functions/functions.php';
                                 </a>
                                 <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="" class="nav-link">
+                                    <a href="general.php" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Add Story</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="hero.php" class="nav-link">
+                                    <a href="" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Set Hero</p>
                                     </a>
@@ -243,13 +247,13 @@ require '../../../functions/functions.php';
                     if (isset($_POST["submit"])) {
 
 
-                      if(tambah($_POST) > 0 ){
+                      if(set_hero($_POST) > 0 ){
                         echo  <<<GFG
                                     <script>
                                     Swal.fire({
                                       icon: "success",
                                       title: "Success",
-                                      text: "Story has been Uploaded!"
+                                      text: "Hero has been Updated!"
                                     })
                                   </script>
                                 GFG;
@@ -259,7 +263,7 @@ require '../../../functions/functions.php';
                                   Swal.fire({
                                     icon: "error",
                                     title: "Failed",
-                                    text: "Failed Upload Story!"
+                                    text: "Failed Updated Hero!"
                                   })
                                 </script>
                     GFG;
@@ -272,7 +276,7 @@ require '../../../functions/functions.php';
               <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                   <li class="breadcrumb-item"><a href="#">Home</a></li>
-                  <li class="breadcrumb-item active">Upload Your Story</li>
+                  <li class="breadcrumb-item active">Set Your Hero</li>
                 </ol>
               </div>
             </div>
@@ -289,96 +293,30 @@ require '../../../functions/functions.php';
                 <!-- general form elements -->
                 <div class="card card-primary">
                   <div class="card-header">
-                    <h3 class="card-title">Upload Foto</h3>
+                    <h3 class="card-title">Set Hero</h3>
                   </div>
                   <!-- /.card-header -->
                   <!-- form start -->
                   <form action="" method="post" enctype="multipart/form-data">
                     <div class="card-body">
-                      <div class="form-group">
-                        <label for="exampleInputEmail1">Event Name</label>
-                        <input
-                          type="text"
-                          class="form-control"
-                          id="exampleInputEmail1"
-                          placeholder="Event Name"
-                          name="judul"
-                        />
-                      </div>
+                     
 
 
   		       <div class="form-group">
                         <div class="form-floating">
-                        <label for="floatingTextarea2">Story</label>
+                        <label for="floatingTextarea2">Hero</label>
 
                           <textarea 
                           class="form-control" 
-                          placeholder="Write Stories here" 
+                          placeholder="Write Description here" 
                           id="floatingTextarea2" 
                           style="height: 100px"
-                          name="story"
-                          ></textarea>
+                          name="hero">
+                          <?= $album["description"]; ?>
+                        </textarea>
                         </div>
                         
-                      </div>
-                      <div class="form-group">
-                        <label for="we">Category</label>
-                          <div class="container">
-                            <div class="row" id="we">
-                              
-                                <div class="col-md-3">
-                                  <div class="form-check">
-                                    <input class="form-check-input" value="our" type="radio" name="category" checked="checked">
-                                    <label class="form-check-label">Our</label>
-                                  </div>
-                                </div>
-                                <div class="col-md-3">
-                                  <div class="form-check">
-                                    <input class="form-check-input" value="erwin" type="radio" name="category">
-                                    <label class="form-check-label">Erwin</label>
-                                  </div>
-                                </div>
-                                <div class="col-md-3">
-                                  <div class="form-check">
-                                    <input class="form-check-input" value="dhea" type="radio" name="category">
-                                    <label class="form-check-label">Dhea</label>
-                                  </div>
-                                </div>
-                                
-                            </div>      
-                            </div>
-                          </div> 
-
-                          <!-- <div class="form-group">
-                            <label>Date:</label>
-                              <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                                  <input type="text" name="tanggal" class="form-control datetimepicker-input" data-target="#reservationdate"/>
-                                  <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
-                                      <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                  </div>
-                              </div>
-                          </div> -->
-
-                      <div class="form-group">
-                        <label for="exampleInputFile">File input</label>
-                        <div class="input-group">
-                          <div class="custom-file">
-                            <input
-                              type="file"
-                              class="custom-file-input"
-                              id="exampleInputFile"
-                              name="foto"
-                            />
-                            <label
-                              class="custom-file-label"
-                              for="exampleInputFile"
-                              >Choose file</label>
-                          </div>
-                          <div class="input-group-append">
-                            <span class="input-group-text">Upload</span>
-                          </div>
-                        </div>
-                      </div>
+                   
 
                     </div>
                     <!-- /.card-body -->

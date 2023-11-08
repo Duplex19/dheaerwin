@@ -237,6 +237,12 @@ $albums = query("SELECT * FROM album");
                         <p>Add Story</p>
                       </a>
                     </li>
+                    <li class="nav-item">
+                      <a href="pages/forms/hero.php" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Set Hero</p>
+                      </a>
+                    </li>
                   
           </div>
           
